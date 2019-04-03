@@ -227,6 +227,10 @@ module ActionController
                 Zlib::BEST_COMPRESSION
               end
 
+            before_action({ only: actions }.merge(options)) do |c|
+              @page_being_cached = true
+            end
+
             after_action({ only: actions }.merge(options)) do |c|
               c.cache_page(nil, nil, gzip_level)
             end
